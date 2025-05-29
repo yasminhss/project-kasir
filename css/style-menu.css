@@ -1,0 +1,420 @@
+/* Global Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #b2cbd4;
+    display: flex;
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 80px;
+    height: 100vh;
+    background-color: #f4f4f4;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .sidebar img {
+    width: 40px;
+    margin-bottom: 40px;
+  }
+  
+  .sidebar a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    margin: 10px 0;
+    background-color: white;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #333;
+    font-size: 20px;
+  }
+  
+  .sidebar a:hover {
+    background-color: #ddd;
+  }
+  
+  /* Main Content */
+  .main {
+    margin-left: 100px;
+    padding: 20px;
+    flex: 1;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .dropdown select {
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  /* Menu Grid */
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+  }
+  
+  .menu-item {
+    background-color: white;
+    border-radius: 20px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  .menu-item img {
+    width: 100%;
+    border-radius: 15px;
+  }
+  
+  .menu-item h4 {
+    margin: 10px 0 5px;
+    font-size: 14px;
+  }
+  
+  .menu-item p {
+    margin: 0;
+    font-weight: bold;
+    color: green;
+  }
+  
+  .menu-item button {
+    margin-top: 5px;
+    padding: 5px 10px;
+    background-color: #5DADE2;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .menu-item button:hover {
+    background-color: #3498DB;
+  }
+  
+  /* Cart */
+  .cart {
+    width: 300px;
+    height: 100%;
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-left: 1px solid #ddd;
+  }
+  
+  .cart h2 {
+    margin-bottom: 20px;
+  }
+  
+  .mode-buttons button {
+    width: 48%;
+    padding: 8px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #ddd;
+    margin-bottom: 15px;
+  }
+  
+  .mode-buttons button.active {
+    background-color: #5DADE2;
+    color: white;
+  }
+  
+  .cancel {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
+  .cancel:hover {
+    background-color: #cc0000;
+  }
+  
+  .total {
+    margin: 20px 0;
+  }
+  
+  .cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cart-item span {
+    flex-grow: 1;
+  }
+  
+  .cart-item .remove-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+  }
+  
+  .cart-item .remove-btn:hover {
+    background-color: #cc0000;
+  }
+  
+  .order-info input,
+  .order-info textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  .order-info textarea {
+    resize: none;
+    height: 60px;
+  }
+  
+  .order-info label {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .btns {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+  
+  .btns button {
+    flex: 1;
+    margin: 0 5px;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: #ddd;
+    cursor: pointer;
+  }
+  
+  .btns button:hover {
+    background-color: #ccc;
+  }
+  
+  .pay {
+    background-color: blue;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .pay:hover {
+    background-color: #0000cc;
+  }
+
+/* Sidebar */
+.sidebar a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px; /* Ukuran kotak link */
+    height: 50px;
+    margin: 25px 0; /* Jarak antar elemen */
+    background-color: transparent; /* Hilangkan latar belakang */
+    border-radius: 10px;
+    text-decoration: none;
+  }
+  
+  .sidebar img.logo {
+    width: 75px; /* Ukuran logo DS lebih besar */
+    height: auto; /* Jaga proporsi */
+    margin-bottom: 60px; /* Jarak di bawah logo */
+    border-radius: 50%; /* Membuat logo berbentuk lingkaran */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Tambahkan efek bayangan */
+}
+
+
+  .sidebar a:hover {
+    background-color: transparent; /* Hilangkan efek hover abu-abu */
+  }
+  
+  .sidebar img.icon {
+    width: 65px; /* Ukuran gambar diperbesar */
+    height: auto; /* Proporsi tetap terjaga */
+    object-fit: contain; /* Pastikan gambar tidak terdistorsi */
+  }
+  
+  .sidebar a {
+    transition: transform 0.2s ease;
+  }
+  
+  .sidebar a:active {
+    transform: scale(0.95); /* Efek klik */
+  }
+
+  /* Modal Styling */
+.modal {
+    display: none; /* Tersembunyi secara default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Overlay dengan transparansi */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #ffffff;
+    padding: 30px 40px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    width: 300px;
+}
+
+.modal-content h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.payment-option {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #5DADE2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.payment-option:hover {
+    background-color: #3498DB;
+}
+
+/* QR Code Modal Styling */
+.qr-code {
+    width: 150px;
+    height: 150px;
+    margin: 20px auto;
+    display: block;
+}
+
+.modal-content .btn-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal-content .cancel,
+.modal-content .success {
+    width: 45%;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+}
+
+.modal-content .cancel {
+    background-color: red;
+}
+
+.modal-content .success {
+    background-color: green;
+}
+
+.modal-content .cancel:hover {
+    background-color: #cc0000;
+}
+
+.modal-content .success:hover {
+    background-color: #006400;
+}
+
+/* Success Modal Styling */
+.success-icon {
+    width: 150px;
+    height: 80px;
+    margin: 20px auto;
+    display: block;
+}
+
+.modal-content h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #3498DB; /* Hijau untuk keberhasilan */
+}
+
+#success-modal .success {
+    background-color: #3498DB;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#success-modal .success:hover {
+    background-color: #3498DB;
+}
+
+/* Cash Modal Styling */
+#cash-modal .modal-content {
+    text-align: center;
+}
+
+#cash-modal .modal-content p {
+    font-size: 18px;
+    margin: 20px 0;
+}
+
+#cash-modal .success {
+    background-color: green;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#cash-modal .success:hover {
+    background-color: #006400;
+}

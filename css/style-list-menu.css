@@ -1,0 +1,163 @@
+/* Global Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #b2cbd4;
+    display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 80px;
+    height: 100vh;
+    background-color: #f4f4f4;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar img.logo {
+    width: 75px;
+    margin-bottom: 60px;
+    border-radius: 50%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px; /* Ukuran tombol seragam */
+    height: 50px;
+    margin: 25px 0; /* Jarak antar elemen */
+    background-color: transparent; /* Hilangkan latar belakang */
+    border-radius: 10px;
+    text-decoration: none;
+    color: #333;
+    font-size: 20px;
+    transition: transform 0.2s ease;
+}
+
+.sidebar a.active {
+    background-color: transparent; /* Hilangkan warna latar belakang tombol aktif */
+}
+
+.sidebar img.icon {
+    width: 65px; /* Ukuran gambar seragam */
+    height: auto;
+    object-fit: contain; /* Pastikan gambar tidak terdistorsi */
+}
+
+.sidebar a:hover {
+    transform: scale(1.1); /* Efek hover memperbesar sedikit */
+}
+
+/* Main Content */
+.main {
+    margin-left: 100px;
+    padding: 20px;
+    flex: 1;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header .status {
+    color: green;
+    font-weight: bold;
+}
+
+/* Controls (Button and Filter) */
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.create-button {
+    padding: 10px 20px;
+    background-color: #3498DB;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.create-button:hover {
+    background-color: #2874A6;
+}
+
+.filter select {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+/* Table Styles */
+.table-container {
+    background-color: #7FB3D5;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background-color: #b2cbd4;
+    color: #000;
+}
+
+thead th {
+    padding: 10px;
+    text-align: left;
+}
+
+tbody td {
+    padding: 10px;
+    text-align: left;
+    vertical-align: middle;
+    background-color: #fff;
+}
+
+tbody tr:nth-child(even) td {
+    background-color: #f4f4f4;
+}
+
+tbody td .action-button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+tbody td .action-button.edit {
+    background-color: #f1c40f;
+}
+
+tbody td .action-button.delete {
+    background-color: #e74c3c;
+}
+
+tbody td .action-button.edit:hover {
+    background-color: #d4ac0d;
+}
+
+tbody td .action-button.delete:hover {
+    background-color: #c0392b;
+}
