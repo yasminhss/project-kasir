@@ -34,7 +34,51 @@ $result = mysqli_query($conn, $query);
         <!-- Button and Filter -->
     <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <button class="btn btn-success">Buat Data</button>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"> buat data
+            </button>
+
+            <!-- Modal -->
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                
+                    <form action="../actions/create-menu.php" method="post" enctype="multipart/form-data" class="modal-content" id="menuForm">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalTitle">Tambah Menu</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" name="id" id="menu-id">
+                            <div class="mb-2">
+                                <label>Nama Menu</label>
+                                <input type="text" name="nama_menu" class="form-control" id="nama_menu" required>
+                            </div>
+                            <div class="mb-2">
+                                <label>Jenis Menu</label>
+                                <select name="type_menu" class="form-control" id="type_menu">
+                                    <option value="Makanan">Makanan</option>
+                                    <option value="Minuman">Minuman</option>
+                                </select>
+                            </div>
+                            <div class="mb-2">
+                                <label>Harga</label>
+                                <input type="number" name="harga" class="form-control" id="harga" required>
+                            </div>
+                            <div class="mb-2">
+                                <label>Foto</label>
+                                <input type="file" name="foto" class="form-control">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                            <button class="btn btn-primary" type="submit">Simpan</button>
+                        </div>
+                    </form>
+              </div>
+            </div>
+            </div>
             <select class="form-select w-auto" id="filter-category">
                 <option value="all">Tampilkan semua</option>
                 <option value="makanan">Makanan</option>
@@ -77,5 +121,25 @@ $result = mysqli_query($conn, $query);
 
     <script src="script-list-menu.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+     <script>
+        function openCreateModal() {
+            document.getElementById('menuForm').action = '../actions/create-menu.php';
+            document.getElementById('modalTitle').innerText = 'Tambah Menu';
+            document.getElementById('menu-id').value = '';
+            document.getElementById('nama_menu').value = '';
+            document.getElementById('type_menu').value = 'Makanan';
+            document.getElementById('harga').value = '';
+        }
+
+        function openEditModal(menu) {
+            document.getElementById('menuForm').action = '../actions/update-menu.php';
+            document.getElementById('modalTitle').innerText = 'Edit Menu';
+            document.getElementById('menu-id').value = menu.id;
+            document.getElementById('nama_menu').value = menu.nama_menu;
+            document.getElementById('type_menu').value = menu.type_menu;
+            document.getElementById('harga').value = menu.harga;
+            new bootstrap.Modal(document.getElementById('menuModal')).show();
+        }
+    </script>
 </body>
 </html>
