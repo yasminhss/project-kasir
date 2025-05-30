@@ -1,8 +1,21 @@
 <?php
 include '../config/db.php';
 
+$kategori = isset($_GET['kategori']) ? $_GET['kategori'] : 'all';
 $query = "SELECT * FROM list_menu";
-$result = mysqli_query($conn, $query);
+if ($kategori !== 'all') {
+    $kategori = $conn->real_escape_string($kategori);
+    $query .= " WHERE kategori = '$kategori'";
+}
+$result = $conn->query($query);
+
+if (!$result) {
+    die("Query gagal: " . $conn->error);
+}
+
+// Cek pesan sukses/gagal dari redirect
+$success = isset($_GET['success']) ? $_GET['success'] : '';
+$error = isset($_GET['error']) ? $_GET['error'] : '';
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +34,7 @@ $result = mysqli_query($conn, $query);
         <a href="../views/menu.php" class="icon-link"><img src="../image/logohome.png" alt="Home" class="icon"></a>
         <a href="../views/dashboard.php" class="icon-link"><img src="../image/dashboard.png" alt="Dashboard" class="icon"></a>
         <a href="../views/list-menu.php" class="icon-link active"><img src="../image/list-menu.png" alt="List Menu" class="icon"></a>
-        <a href="../actions/logout.php" class="icon-link"><img src="../image/logout.png" alt="Logout" class="icon"></a>
+        <a href="../actions/logout.php" class="icon-link" onclick="return confirm('Yakin ingin logout?')"><img src="../image/logout.png" alt="Logout" class="icon"></a>
     </div>
 
     <!-- Main Content -->
@@ -31,114 +44,143 @@ $result = mysqli_query($conn, $query);
             <span class="status">Admin ● Online</span>
         </div>
 
+        <!-- Notifikasi -->
+        <?php if ($success): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <?php echo htmlspecialchars($success); ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif; ?>
+        <?php if ($error): ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <?php echo htmlspecialchars($error); ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif; ?>
+
         <!-- Button and Filter -->
-    <div class="container mt-5">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"> buat data
-            </button>
+        <div class="container mt-5">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <button type="button" class="btn btn-primary" onclick="openCreateModal()">Tambah Menu</button>
+                <select class="form-select w-auto" id="filter-category" onchange="filterMenu()">
+                    <option value="all" <?php echo $kategori == 'all' ? 'selected' : ''; ?>>Tampilkan semua</option>
+                    <option value="Makanan" <?php echo $kategori == 'Makanan' ? 'selected' : ''; ?>>Makanan</option>
+                    <option value="Minuman" <?php echo $kategori == 'Minuman' ? 'selected' : ''; ?>>Minuman</option>
+                </select>
+            </div>
 
             <!-- Modal -->
-
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                
-                    <form action="../actions/create-menu.php" method="post" enctype="multipart/form-data" class="modal-content" id="menuForm">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="modalTitle">Tambah Menu</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                        </div>
-                        <div class="modal-body">
-                            <input type="hidden" name="id" id="menu-id">
-                            <div class="mb-2">
-                                <label>Nama Menu</label>
-                                <input type="text" name="nama_menu" class="form-control" id="nama_menu" required>
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form action="" method="post" enctype="multipart/form-data" id="menuForm">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalTitle">Tambah Menu</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <div class="mb-2">
-                                <label>Jenis Menu</label>
-                                <select name="type_menu" class="form-control" id="type_menu">
-                                    <option value="Makanan">Makanan</option>
-                                    <option value="Minuman">Minuman</option>
-                                </select>
+                            <div class="modal-body">
+                                <input type="hidden" name="id" id="menu-id">
+                                <div class="mb-3">
+                                    <label for="nama_menu" class="form-label">Nama Menu</label>
+                                    <input type="text" name="nama_menu" class="form-control" id="nama_menu" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="kategori" class="form-label">Kategori</label>
+                                    <select name="kategori" class="form-control" id="kategori" required>
+                                        <option value="Makanan">Makanan</option>
+                                        <option value="Minuman">Minuman</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="harga" class="form-label">Harga</label>
+                                    <input type="number" name="harga" class="form-control" id="harga" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="foto" class="form-label">Foto</label>
+                                    <input type="file" name="foto" class="form-control" id="foto" accept="image/*">
+                                </div>
                             </div>
-                            <div class="mb-2">
-                                <label>Harga</label>
-                                <input type="number" name="harga" class="form-control" id="harga" required>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                <button type="submit" class="btn btn-primary">Simpan</button>
                             </div>
-                            <div class="mb-2">
-                                <label>Foto</label>
-                                <input type="file" name="foto" class="form-control">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                            <button class="btn btn-primary" type="submit">Simpan</button>
-                        </div>
-                    </form>
-              </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            </div>
-            <select class="form-select w-auto" id="filter-category">
-                <option value="all">Tampilkan semua</option>
-                <option value="makanan">Makanan</option>
-                <option value="minuman">Minuman</option>
-            </select>
-        </div>
-        <table class="table table-bordered table-striped align-middle">
-            <thead class="table-dark">
-                <tr>
-                    <th>No.</th>
-                    <th>Nama Menu</th>
-                    <th>Kategori Menu</th>
-                    <th>Harga Menu</th>
-                    <th>Foto Menu</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody id="menu-list">
-    <?php
-    $no = 1;
-    while ($row = mysqli_fetch_assoc($result)) {
-        echo "<tr>";
-        echo "<td>{$no}</td>";
-        echo "<td>{$row['nama_menu']}</td>";
-        echo "<td>{$row['kategori']}</td>";
-        echo "<td>Rp" . number_format($row['harga'], 0, ',', '.') . "</td>";
-        echo "<td><img src='../image/{$row['foto']}' alt='{$row['nama_menu']}' width='70'></td>";
-        echo "<td>
-                <a href='edit-menu.php?id={$row['id']}' class='btn btn-primary btn-sm'>Edit</a>
-                <a href='../actions/delete-menu.php?id={$row['id']}' class='btn btn-danger btn-sm' onclick=\"return confirm('Yakin ingin hapus?')\">Hapus</a>
-              </td>";
-        echo "</tr>";
-        $no++;
-    }
-    ?>
-</tbody>
 
-        </table>
+            <!-- Table -->
+            <table class="table table-bordered table-striped align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>No.</th>
+                        <th>Nama Menu</th>
+                        <th>Kategori</th>
+                        <th>Harga</th>
+                        <th>Foto</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="menu-list">
+                    <?php
+                    $no = 1;
+                    while ($row = $result->fetch_assoc()) {
+                        ?>
+                        <tr>
+                            <td><?php echo $no; ?></td>
+                            <td><?php echo htmlspecialchars($row['nama_menu']); ?></td>
+                            <td><?php echo htmlspecialchars($row['kategori']); ?></td>
+                            <td>Rp<?php echo number_format($row['harga'], 0, ',', '.'); ?></td>
+                            <td>
+                                <img src="../image/<?php echo htmlspecialchars($row['foto'] ?: 'default.jpg'); ?>" 
+                                     alt="<?php echo htmlspecialchars($row['nama_menu']); ?>" 
+                                     width="70" 
+                                     onerror="this.src='../image/default.jpg';">
+                            </td>
+                            <td>
+                                <button class="btn btn-primary btn-sm" onclick='openEditModal(<?php echo json_encode($row); ?>)'>Edit</button>
+                                <a href="../actions/delete-menu.php?id=<?php echo $row['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin hapus?')">Hapus</a>
+                            </td>
+                        </tr>
+                        <?php
+                        $no++;
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    <script src="script-list-menu.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-     <script>
+    <script>
         function openCreateModal() {
-            document.getElementById('menuForm').action = '../actions/create-menu.php';
+            const form = document.getElementById('menuForm');
+            form.action = '../actions/list_menu/create_list_menu.php';
+            form.reset();
             document.getElementById('modalTitle').innerText = 'Tambah Menu';
             document.getElementById('menu-id').value = '';
             document.getElementById('nama_menu').value = '';
-            document.getElementById('type_menu').value = 'Makanan';
+            document.getElementById('kategori').value = 'Makanan';
             document.getElementById('harga').value = '';
+            document.getElementById('foto').setAttribute('required', 'required');
+            new bootstrap.Modal(document.getElementById('exampleModal')).show();
         }
 
         function openEditModal(menu) {
-            document.getElementById('menuForm').action = '../actions/update-menu.php';
+            const form = document.getElementById('menuForm');
+            form.action = '../actions/list_menu/update_list_menu.php';
             document.getElementById('modalTitle').innerText = 'Edit Menu';
             document.getElementById('menu-id').value = menu.id;
             document.getElementById('nama_menu').value = menu.nama_menu;
-            document.getElementById('type_menu').value = menu.type_menu;
+            document.getElementById('kategori').value = menu.kategori;
             document.getElementById('harga').value = menu.harga;
-            new bootstrap.Modal(document.getElementById('menuModal')).show();
+            document.getElementById('foto').removeAttribute('required');
+            new bootstrap.Modal(document.getElementById('exampleModal')).show();
+        }
+
+        function filterMenu() {
+            const kategori = document.getElementById('filter-category').value;
+            window.location.href = `list-menu.php?kategori=${kategori}`;
         }
     </script>
 </body>
