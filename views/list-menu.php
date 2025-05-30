@@ -138,7 +138,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : '';
                             </td>
                             <td>
                                 <button class="btn btn-primary btn-sm" onclick='openEditModal(<?php echo json_encode($row); ?>)'>Edit</button>
-                                <a href="../actions/delete-menu.php?id=<?php echo $row['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin hapus?')">Hapus</a>
+                                <a href="../actions/list_menu/delete_list_menu.php?id=<?php echo $row['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin hapus?')">Hapus</a>
                             </td>
                         </tr>
                     <?php

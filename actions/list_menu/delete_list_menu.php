@@ -1,5 +1,5 @@
 <?php
-include '../config/db.php';
+include '../../config/db.php';
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -12,8 +12,8 @@ if (isset($_GET['id'])) {
     $row = $result->fetch_assoc();
     
     // Hapus file foto jika ada
-    if ($row['foto'] && file_exists("../image/" . $row['foto'])) {
-        unlink("../image/" . $row['foto']);
+    if ($row['foto'] && file_exists("../upload/" . $row['foto'])) {
+        unlink("../upload/" . $row['foto']);
     }
 
     // Hapus data dari database
@@ -30,3 +30,5 @@ if (isset($_GET['id'])) {
 }
 $conn->close();
 ?>
+
+gmn

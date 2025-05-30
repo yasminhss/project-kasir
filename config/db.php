@@ -2,7 +2,7 @@
 $host = "localhost";
 $user = "root";
 $pass = "";
-$db   = "b4nativephp";
+$db   = "login_app";
 
 $conn = new mysqli($host, $user, $pass, $db);
 
