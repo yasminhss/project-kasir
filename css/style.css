@@ -1,146 +1,146 @@
 /* CSS untuk halaman login */
 body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #7FB3D5; /* Warna latar belakang */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #7fb3d5; /* Warna latar belakang */
 }
 
 /* Kontainer untuk form login */
 .login-container {
-    background-color: #F2F3F4; /* Warna putih keabuan */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    width: 300px; /* Lebar tetap */
+  background-color: #f2f3f4; /* Warna putih keabuan */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 300px; /* Lebar tetap */
 }
 
 /* Judul form login */
 .login-form h2 {
-    margin-bottom: 20px;
-    color: #333; /* Warna teks */
+  margin-bottom: 20px;
+  color: #333; /* Warna teks */
 }
 
 /* Input field */
 .login-form input {
-    width: 80%; /* Ubah dari 100% ke 80% agar lebih kecil */
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc; /* Border abu-abu */
-    border-radius: 5px;
-    font-size: 16px;
-    box-sizing: border-box; /* Pastikan padding tidak menambah lebar elemen */
+  width: 80%; /* Ubah dari 100% ke 80% agar lebih kecil */
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc; /* Border abu-abu */
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box; /* Pastikan padding tidak menambah lebar elemen */
 }
 
 /* Link untuk Lupa Password */
 .forgot-password {
-    display: block;
-    margin-bottom: 15px;
-    color: #3498DB; /* Warna biru */
-    text-decoration: none;
+  display: block;
+  margin-bottom: 15px;
+  color: #3498db; /* Warna biru */
+  text-decoration: none;
 }
 
 /* Tombol Login */
 #login-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #5DADE2; /* Warna biru */
-    border: none;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
+  width: 100%;
+  padding: 10px;
+  background-color: #5dade2; /* Warna biru */
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 /* Efek hover untuk tombol login */
 #login-button:hover {
-    background-color: #3498DB; /* Biru lebih gelap */
+  background-color: #3498db; /* Biru lebih gelap */
 }
 
 /* Kontainer untuk form reset password */
 .login-container {
-    background-color: #F2F3F4;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    width: 300px;
-    margin: auto;
-    margin-top: 100px;
+  background-color: #f2f3f4;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 300px;
+  margin: auto;
+  margin-top: 100px;
 }
 
 /* Judul form reset password */
 .login-form h2 {
-    margin-bottom: 20px;
-    color: #333;
+  margin-bottom: 20px;
+  color: #333;
 }
 
 /* Input email */
 .login-form input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
 }
 
 /* Tombol Kirim */
 #reset-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #5DADE2;
-    border: none;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
+  width: 100%;
+  padding: 10px;
+  background-color: #5dade2;
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 #reset-button:hover {
-    background-color: #3498DB;
+  background-color: #3498db;
 }
 
 /* CSS untuk Modal */
 .modal {
-    display: none; /* Sembunyikan modal secara default */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Latar belakang transparan */
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+  display: none; /* Sembunyikan modal secara default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Latar belakang transparan */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
 .modal-content {
-    background-color: #fff; /* Warna putih untuk konten modal */
-    padding: 20px;
-    border-radius: 5px;
-    text-align: center;
-    width: 300px;
-    position: relative; /* Untuk posisi tombol close */
+  background-color: #fff; /* Warna putih untuk konten modal */
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+  width: 300px;
+  position: relative; /* Untuk posisi tombol close */
 }
 
 .hidden {
-    display: none; /* Menyembunyikan elemen */
+  display: none; /* Menyembunyikan elemen */
 }
 
 /* Tombol Tutup Modal */
 .close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    font-size: 20px;
-    color: #333;
-    font-weight: bold;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+  color: #333;
+  font-weight: bold;
 }

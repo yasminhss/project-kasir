@@ -8,25 +8,27 @@ $result = mysqli_query($conn, $query);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pemesanan Menu - Dapur Sunda</title>
-  <link rel="stylesheet" href="../css/style-menu.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pemesanan Menu - Dapur Sunda</title>
+    <link rel="stylesheet" href="../css/style-menu.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
     <div class="sidebar">
         <!-- Logo Dapur Sunda -->
         <img src="../image/logo-ds.png" alt="Logo Dapur Sunda" class="logo">
-      
+
         <!-- Menu Sidebar -->
         <a href="../views/menu.php" class="icon-link active"><img src="../image/logohome.png" alt="Home" class="icon"></a>
         <a href="../views/dashboard.php" class="icon-link"><img src="../image/dashboard.png" alt="Dashboard" class="icon"></a>
         <a href="../views/list-menu.php" class="icon-link"><img src="../image/list-menu.png" alt="List Menu" class="icon"></a>
         <a href="../actions/logout.php" class="icon-link"><img src="../image/logout.png" alt="Logout" class="icon"></a>
     </div>
-    
+
     <!-- Main Content -->
     <div class="main">
         <div class="header">
@@ -42,24 +44,24 @@ $result = mysqli_query($conn, $query);
         </div>
 
         <div class="menu-grid container">
-  <div class="row">
-    <?php
-    while ($row = mysqli_fetch_assoc($result)) {
-    ?>
-      <div class="col-md-4 mb-4">
-        <div class="card h-100 shadow">
-          <img src="../image/<?= $row['foto'] ?>" class="card-img-top" alt="<?= $row['nama_menu'] ?>" style="height: 200px; object-fit: cover;">
-          <div class="card-body">
-            <h5 class="card-title"><?= $row['nama_menu'] ?></h5>
-            <p class="card-text"><?= $row['kategori'] ?></p>
-            <p class="card-text fw-bold">Rp<?= number_format($row['harga'], 0, ',', '.') ?></p>
-            <button class="btn btn-success w-100 add-to-cart" data-id="<?= $row['id'] ?>">Tambah ke Keranjang</button>
-          </div>
+            <div class="row">
+                <?php
+                while ($row = mysqli_fetch_assoc($result)) {
+                ?>
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 shadow">
+                            <img src="../image/<?= $row['foto'] ?>" class="card-img-top" alt="<?= $row['nama_menu'] ?>" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title"><?= $row['nama_menu'] ?></h5>
+                                <p class="card-text"><?= $row['kategori'] ?></p>
+                                <p class="card-text fw-bold">Rp<?= number_format($row['harga'], 0, ',', '.') ?></p>
+                                <button class="btn btn-success w-100 add-to-cart" data-id="<?= $row['id'] ?>">Tambah ke Keranjang</button>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
         </div>
-      </div>
-    <?php } ?>
-  </div>
-</div>
 
     </div>
 
@@ -99,13 +101,13 @@ $result = mysqli_query($conn, $query);
     </div>
 
     <!-- Modal Pilihan Pembayaran -->
-<div id="payment-modal" class="modal">
-    <div class="modal-content">
-        <h2>Pilih Metode Pembayaran</h2>
-        <button class="payment-option" id="qris-button">Qris</button>
-        <button class="payment-option" id="cash-button">Tunai</button>
+    <div id="payment-modal" class="modal">
+        <div class="modal-content">
+            <h2>Pilih Metode Pembayaran</h2>
+            <button class="payment-option" id="qris-button">Qris</button>
+            <button class="payment-option" id="cash-button">Tunai</button>
+        </div>
     </div>
-</div>
 
     <!-- Modal QR Code -->
     <div id="qris-modal" class="modal">
@@ -144,4 +146,5 @@ $result = mysqli_query($conn, $query);
     <script src="script-menu.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

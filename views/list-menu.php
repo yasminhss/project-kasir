@@ -20,6 +20,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : '';
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,6 +28,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : '';
     <link rel="stylesheet" href="../css/style-list-menu.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
     <!-- Sidebar -->
     <div class="sidebar">
@@ -125,24 +127,21 @@ $error = isset($_GET['error']) ? $_GET['error'] : '';
                     <?php
                     $no = 1;
                     while ($row = $result->fetch_assoc()) {
-                        ?>
+                    ?>
                         <tr>
                             <td><?php echo $no; ?></td>
                             <td><?php echo htmlspecialchars($row['nama_menu']); ?></td>
                             <td><?php echo htmlspecialchars($row['kategori']); ?></td>
                             <td>Rp<?php echo number_format($row['harga'], 0, ',', '.'); ?></td>
                             <td>
-                                <img src="../image/<?php echo htmlspecialchars($row['foto'] ?: 'default.jpg'); ?>" 
-                                     alt="<?php echo htmlspecialchars($row['nama_menu']); ?>" 
-                                     width="70" 
-                                     onerror="this.src='../image/default.jpg';">
+                                <img src="../upload/<?php echo htmlspecialchars($row['foto'] ?: 'default.png'); ?>" width="70">
                             </td>
                             <td>
                                 <button class="btn btn-primary btn-sm" onclick='openEditModal(<?php echo json_encode($row); ?>)'>Edit</button>
                                 <a href="../actions/delete-menu.php?id=<?php echo $row['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin hapus?')">Hapus</a>
                             </td>
                         </tr>
-                        <?php
+                    <?php
                         $no++;
                     }
                     ?>
@@ -153,6 +152,21 @@ $error = isset($_GET['error']) ? $_GET['error'] : '';
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        setTimeout(function() {
+            const alert = document.querySelector('.alert');
+            if (alert) {
+                const bsAlert = new bootstrap.Alert(alert);
+                bsAlert.close();
+            }
+        }, 3000);
+
+        if (window.location.search.includes('success') || window.location.search.includes('error')) {
+            const url = new URL(window.location.href);
+            url.searchParams.delete('success');
+            url.searchParams.delete('error');
+            window.history.replaceState({}, document.title, url.pathname + url.search);
+        }
+
         function openCreateModal() {
             const form = document.getElementById('menuForm');
             form.action = '../actions/list_menu/create_list_menu.php';
@@ -184,4 +198,5 @@ $error = isset($_GET['error']) ? $_GET['error'] : '';
         }
     </script>
 </body>
+
 </html>
